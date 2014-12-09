@@ -10,7 +10,7 @@ window.chordDiagram = function ( frets, fingers )
 	};
 
 	if (!validateArray(frets, 32)) throw "Frets parameter format is invalid";
-	if (!validateArray(fingers, 4)) throw "Fingers parameter format is invalid";
+	if(typeof(fingers)!=='undefined' && !validateArray(fingers, 4)) throw "Fingers parameter format is invalid";
 
 	var header_row_needed = false;
 	var footer_row_needed = false;
