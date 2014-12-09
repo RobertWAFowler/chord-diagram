@@ -143,8 +143,8 @@ window.chordDiagram = function ( frets, fingers )
 
 			if (frets[i] > 0)
 			{
-				if (fingers[i] == 0) finger_cell.innerText = 'T';
-				else if (fingers[i] > 0) finger_cell.innerText = fingers[i];
+				if (fingers[i] == 0) finger_cell.innerHTML = 'T';
+				else if (fingers[i] > 0) finger_cell.innerHTML = fingers[i];
 			}
 
 			footer_row.appendChild(finger_cell);
