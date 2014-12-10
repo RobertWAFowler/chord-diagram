@@ -26,6 +26,26 @@ var chordDiagram = (function() {
         return header_row;
     }
 	
+	function build_footer(frets, fingers){
+        var footer_row = document.createElement('div');
+        footer_row.className = 'footer';
+
+        for (i in fingers)
+        {
+            var finger_cell = document.createElement('div');
+
+            if (frets[i] > 0)
+            {
+                if (fingers[i] == 0) finger_cell.innerHTML = 'T';
+                else if (fingers[i] > 0) finger_cell.innerHTML = fingers[i];
+            }
+
+            footer_row.appendChild(finger_cell);
+        }
+        return footer_row;
+    }
+	
+	
 	module.build_diagram = function (frets, fingers){
 	
         var num_strings = frets.length;
@@ -142,23 +162,7 @@ var chordDiagram = (function() {
 
         if (footer_row_needed)
         {
-            var footer_row = document.createElement('div');
-            footer_row.className = 'footer';
-
-            for (i = 0; i < num_strings; ++i)
-            {
-                var finger_cell = document.createElement('div');
-
-                if (frets[i] > 0)
-                {
-                    if (fingers[i] == 0) finger_cell.innerHTML = 'T';
-                    else if (fingers[i] > 0) finger_cell.innerHTML = fingers[i];
-                }
-
-                footer_row.appendChild(finger_cell);
-            }
-
-            container.appendChild(footer_row);
+            container.appendChild(build_footer(frets, fingers));
         }
 
         return container;
