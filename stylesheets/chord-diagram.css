@@ -1,6 +1,7 @@
 div.chord-diagram {
 	overflow: hidden;
 	display: inline-block;
+    vertical-align:top;
 }
 
 div.chord-diagram > div.header {
@@ -136,6 +137,6 @@ div.chord-diagram > div.footer > div {
 	font-size: 10px;
 	text-align: center;
 	width: 9px;
-	height: 10px;
+	height: 11px;
 	float: left;
 }
