@@ -1,23 +1,25 @@
 window.chordDiagram = function ( frets, fingers )
 {
-	var validateArray = function ( array, max_value )
+	var validateArray = function ( array, size, max_value )
 	{
 		if ('object' != typeof array) return false;
 
-		for (var i = 0; i < 6; ++i) if ('number' != typeof array[i] || array[i] % 1 !== 0 || array[i] < -1 || array[i] > max_value) return false;
+		for (var i = 0; i < size; ++i) if ('number' != typeof array[i] || array[i] % 1 !== 0 || array[i] < -1 || array[i] > max_value) return false;
 
 		return true;
 	};
+	
+	var num_strings = frets.length;
 
-	if (!validateArray(frets, 32)) throw "Frets parameter format is invalid";
-	if(typeof(fingers)!=='undefined' && !validateArray(fingers, 4)) throw "Fingers parameter format is invalid";
+	if (!validateArray(frets, num_strings, 32)) throw "Frets parameter format is invalid";
+	if(typeof(fingers)!=='undefined' && !validateArray(fingers, num_strings, 4)) throw "Fingers parameter format is invalid";
 
 	var header_row_needed = false;
 	var footer_row_needed = false;
 	var fret_min = 100;
 	var fret_max = 0;
 
-	for (var i = 0; i < 6; ++i)
+	for (var i = 0; i < num_strings; ++i)
 	{
 		if (frets[i] == 0 || frets[i] == -1) header_row_needed = true;
 		if (frets[i] > -1 && frets[i] > fret_max) fret_max = frets[i];
@@ -62,7 +64,7 @@ window.chordDiagram = function ( frets, fingers )
 
 		if (footer_row_needed)
 		{
-			for (i = 0; i < 6; ++i)
+			for (i = 0; i < num_strings; ++i)
 			{
 				if (barre_start != -1)
 				{
@@ -87,7 +89,7 @@ window.chordDiagram = function ( frets, fingers )
 			if (barre_finish <= barre_start) barre_start = -1;
 		}
 
-		for (i = 0; i < 5; ++i)
+		for (i = 0; i < num_strings-1; ++i)
 		{
 			var fret_cell = document.createElement('div');
 
@@ -137,7 +139,7 @@ window.chordDiagram = function ( frets, fingers )
 		var footer_row = document.createElement('div');
 		footer_row.className = 'footer';
 
-		for (i = 0; i < 6; ++i)
+		for (i = 0; i < num_strings; ++i)
 		{
 			var finger_cell = document.createElement('div');
 
