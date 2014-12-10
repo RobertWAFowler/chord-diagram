@@ -8,6 +8,7 @@ script.teaching{
   padding: 20px;
   margin-bottom: 30px;
   font-size: 14px;
+  white-space: pre;
 }
 
 .chord-diagram{

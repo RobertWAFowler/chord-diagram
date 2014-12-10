@@ -23,7 +23,7 @@
 
         <header>
           <h1>Chord diagram generator</h1>
-          <h2>A function, written in pure javascript, which draws basic guitar chord diagrams in HTML/CSS</h2>
+          <h2>Pure javascript, to draw basic guitar chord diagrams in HTML/CSS</h2>
         </header>
 
         <section id="downloads" class="clearfix">
@@ -38,74 +38,114 @@
           <h1>
 <a name="chord-diagram-generator-in-pure-js" class="anchor" href="#chord-diagram-generator-in-pure-js"><span class="octicon octicon-link"></span></a>Chord diagram generator in pure JS</h1>
 
-<p>A tiny (~750 bytes when minified and gzipped) function written in pure javascript (no jQuery or other dependencies) which draws basic guitar chord diagrams in HTML/CSS. Accepts an array of fret positions (mandatory) and an array of finger numbers (optional). Automatically detects barre if more than one string is picked on the same fret with the same finger.</p>
+<p>A tiny javascript file (no jQuery or other dependencies) to draw basic guitar chord diagrams in HTML/CSS. 
 
-<h2>
-<a name="showcase" class="anchor" href="#showcase"><span class="octicon octicon-link"></span></a>Showcase</h2>
-The following chords are displayed using the JS generator (code below):
-<div id="chord-container">
-</div>
 
-<h2>
-<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
+<h2><a name="showcase" class="anchor" href="#showcase"><span class="octicon octicon-link"></span></a>Showcase</h2>
+The following chords are displayed using the JS generator:<br>
+    <div class="chord-diagram" data-shift="0" data-frets="X30210" data-fingers="X30210"></div>
+    <div class="chord-diagram" data-shift="0" data-frets="133211" data-fingers="1342111"></div>
+    <div class="chord-diagram" data-shift="0" data-frets="XX0232"></div>
+    <div class="chord-diagram" data-shift="7" data-frets="022000"></div>
+    <div class="chord-diagram" data-frets="2100"></div>
+    
+<p>The first diagram above should look like this:<br>
+<img src="https://raw.github.com/oliverpool/chord-diagram/master/demo/C.png" alt="C chord diagram goes here"></p>
+
+<h2><a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
 
 <p>Download a <a href="https://github.com/oliverpool/chord-diagram/blob/master/js/chord-diagram.js">JS file</a> and a <a href="https://github.com/oliverpool/chord-diagram/blob/master/css/chord-diagram.css">CSS stylesheet</a>, drop them onto your page.
 
-<br/>To create a <code>div</code> containing DOM structure for <strong>C</strong> chord call:</p>
+<br/>Call the <code>chordDiagram.on_load()</code> function when the page is loaded:</p>
+ 
+    <script type="text/javascript" class="teaching">
+var oldonload = window.onload;
+    if (typeof window.onload !== 'function') {
+        window.onload = chordDiagram.on_load;
+    } else {
+        window.onload = function () {
+            if (oldonload) {
+                oldonload();
+            }
+            chordDiagram.on_load();
+        };
+    }
+    </script>
 
-
-
+And add the diagram you want to display:
+<code>
+<pre>
+&lt;div class="chord-diagram" data-shift="0" data-frets="133211" data-fingers="1342111">&lt;/div>
+</pre>
+</code>
 <script type="text/javascript" class="teaching">
-var diagram_c = chordDiagram([-1,3,2,0,1,0], [-1,3,2,-1,1,-1]);
 </script>
 
+<h2><a name="args" class="anchor" href="#args"><span class="octicon octicon-link"></span></a>Tag Attributes</h2>
 
-<p>Then to attach it to your document, call:</p>
+<h3>data-frets</h3>
+<em>mandatory</em>
+<p>List of the frets that must be pressed. 'X' means that the string should not be played.</p>
 
-<script type="text/javascript" class="teaching">
-document.getElementById('chord-container').appendChild(diagram_c);
-</script>
+<h3>data-shift</h3>
+<em>optionnal</em>
+<p>Allows to shift the reference of the fret.</p>
 
-<p>The first diagram above should look like this:</p>
-<p><img src="https://raw.github.com/oliverpool/chord-diagram/master/demo/C.png" alt="C chord diagram goes here"></p>
+<h3>data-fingers</h3>
+<em>optionnal</em>
+<p>Indicate which fingers should be used for which string.</p>
 
-<h2><a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
+<h2><a name="functions" class="anchor" href="#functions"><span class="octicon octicon-link"></span></a>JS Functions</h2>
 
-<p>The following diagram are gatherd in the showcase.</p>
+<p>The following functions can be used:</p>
 
-<p>Barre will be displayed if one finder is used on the same fret:</p>
-<script type="text/javascript" class="teaching">
-var diagram_f = chordDiagram([1,3,3,2,1,1], [1,3,4,2,1,1]);
-document.getElementById('chord-container').appendChild(diagram_f);
-</script>
 
-<p>It is possible not to define the finger to be used:</p>
-<script type="text/javascript" class="teaching">
-var diagram_d = chordDiagram([-1,-1,0,2,3,2]);
-document.getElementById('chord-container').appendChild(diagram_d);
-</script>
+<h3>chordDiagram.replace_tags(<em>container, classname, tagname</em>)</h3>
+<dl>
+    <dt>container</dt>
+    <dd>
+        <em>optional</em><br/>
+        DOM-object to indicate where to search for chord-diagrams (default : document.body)
+        <br><br>
+    </dd>
+    
+    <dt>classname</dt>
+    <dd>
+        <em>optional</em><br/>
+        class of the tags to replace with diagrams (default : chord-diagram)
+        <br><br>
+    </dd>
+    
+    <dt>tagname</dt>
+    <dd>
+        <em>optional</em><br/>
+        tag of the objects to replace with diagrams (default : div)
+        <br>
+    </dd>
+</dl>
 
-<p>Ukulele chords can also be displayed:</p>
-<script type="text/javascript" class="teaching">
-var diagram_bm = chordDiagram([7,9,9,7,7,7], [1,3,4,1,1,1]);
-document.getElementById('chord-container').appendChild(diagram_bm);
-</script>
-
-<p>Ukulele chords can also be displayed:</p>
-<script type="text/javascript" class="teaching">
-var diagram_u_a = chordDiagram([2,1,0,0]);
-document.getElementById('chord-container').appendChild(diagram_u_a);
-</script>
-
-<h2>
-<a name="arguments" class="anchor" href="#arguments"><span class="octicon octicon-link"></span></a>Arguments</h2>
-
-<p>You sort of can work it out from the above example, but I will describe it here at some point.</p>
+<h3>chordDiagram.build_diagram(<em>frets, fingers</em>)</h3>
+<dl>
+    <dt>frets<dt>
+    <dd>
+        <em>mandatory</em><br/>
+        Array of the frets : '-1' means that the string should not be played.
+        <br><br>
+    </dd>
+    
+    <dt>fingers</dt>
+    <dd>
+        <em>optional</em><br/>
+        Array of the fingers in the order of the strings.<br>
+        Barre will be displayed if one finder is used on the same fret.
+        <br>
+    </dd>
+</dl>
 
 <h2>
 <a name="copyright-and-license" class="anchor" href="#copyright-and-license"><span class="octicon octicon-link"></span></a>Copyright and license</h2>
 
-<p>Doesn't apply. Use it as you wish, but be aware that it may explode and blow your head off or something, so don't come back to me if that happens blah blah blah.</p>
+<p>Based on the work of <a href="https://github.com/shkuznetsov/chord-diagram">shkuznetsov</a>, redistributed here under <a href="https://raw.github.com/oliverpool/chord-diagram/master/LICENSE">MIT license</a>.</p>
         </section>
 
         <footer>
@@ -116,5 +156,7 @@ document.getElementById('chord-container').appendChild(diagram_u_a);
         
       </div>
     </div>
+    
+ 
   </body>
 </html>
