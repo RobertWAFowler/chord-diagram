@@ -10,6 +10,21 @@ var chordDiagram = (function() {
 		return true;
 	}
 	
+	function build_header(frets){
+        var header_row = document.createElement('div');
+        header_row.className = 'header';
+
+        for (i in frets)
+        {
+            var header_cell = document.createElement('div');
+
+            if (frets[i] == 0) header_cell.appendChild = '<div></div>';
+            else if (frets[i] == -1) header_cell.innerHTML = '&times;';
+
+            header_row.appendChild(header_cell);
+        }
+        return header_row;
+    }
 	
 	module.build_diagram = function (frets, fingers){
 	
@@ -36,20 +51,7 @@ var chordDiagram = (function() {
 
         if (header_row_needed)
         {
-            var header_row = document.createElement('div');
-            header_row.className = 'header';
-
-            for (i in frets)
-            {
-                var header_cell = document.createElement('div');
-
-                if (frets[i] == 0) header_cell.innerHTML = '<div></div>';
-                else if (frets[i] == -1) header_cell.innerHTML = '&times;';
-
-                header_row.appendChild(header_cell);
-            }
-
-            container.appendChild(header_row);
+            container.appendChild(build_header(frets));
         }
 
         var first_fret = fret_max > 5 ? fret_min : 1;
