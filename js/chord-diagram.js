@@ -182,6 +182,62 @@ var chordDiagram = (function() {
         return container;
 	
 	}
+	
+	module.replace_tags = function(container, classname, tagname){
+	
+        // default arguments
+        if(typeof(container)==='undefined')
+            container = document.body;
+        if(typeof(classname)==='undefined')
+            classname = 'chord-diagram';
+        if(typeof(tagname)==='undefined')
+            tagname = 'div';
+        
+        
+        var diagram_tags = container.getElementsByClassName(classname),
+            j;
+        
+        for(j in diagram_tags){
+        
+            var diagram_tag = diagram_tags[j];
+            if(typeof(diagram_tag)!=='object')
+                continue;
+            
+            var frets_string = diagram_tag.getAttribute('data-frets');
+            if(!frets_string)
+                continue;
+            
+            var shift = +diagram_tag.getAttribute('data-shift');
+            var frets_number = frets_string.length;
+            var frets = [];    
+            
+            for(var i = 0; i < frets_number; i++){
+                var fret_char = frets_string.charAt(i).toLowerCase();
+                if(fret_char == 'x')
+                    frets[i] = -1;
+                else
+                    frets[i] = +fret_char + shift;
+            }
+            
+            var fingers_string = diagram_tag.getAttribute('data-fingers');
+            var diagram;
+            if(fingers_string && frets_number <= fingers_string.length){
+                var fingers = [];  
+                for(var i = 0; i < frets_number; i++){    
+                    var finger_char = fingers_string.charAt(i).toLowerCase();
+                    if(finger_char == 'x')
+                        fingers[i] = -1;
+                    else
+                        fingers[i] = +finger_char;
+                }
+                diagram = module.build_diagram(frets, fingers);
+            } else {
+                diagram = module.build_diagram(frets);
+            }
+            
+            diagram_tag.innerHTML = diagram.innerHTML;
+        }
+    }
     
     return module;
 }());
