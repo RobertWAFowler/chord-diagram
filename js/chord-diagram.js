@@ -182,6 +182,9 @@ var chordDiagram = (function() {
         return container;
     
     }
+    module.on_load = function(){
+        return module.replace_tags();
+    }
     module.replace_tags = function(container, classname, tagname){
     
         // default arguments
@@ -240,3 +243,23 @@ var chordDiagram = (function() {
     
     return module;
 }());
+
+
+/*
+//Code example to load it automatically:
+if(window.jQuery){
+    window.jQuery.ready(chordDiagram.on_load);
+} else {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = chordDiagram.on_load;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      chordDiagram.on_load();
+    }
+  }
+}
+//*/
