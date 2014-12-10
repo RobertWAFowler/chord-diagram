@@ -18,7 +18,7 @@ var chordDiagram = (function() {
         {
             var header_cell = document.createElement('div');
 
-            if (frets[i] == 0) header_cell.appendChild = '<div></div>';
+            if (frets[i] == 0) header_cell.appendChild(document.createElement('div'));
             else if (frets[i] == -1) header_cell.innerHTML = '&times;';
 
             header_row.appendChild(header_cell);
