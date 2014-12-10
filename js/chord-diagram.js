@@ -126,7 +126,7 @@ window.chordDiagram = function ( frets, fingers )
 		{
 			var fretno_cell = document.createElement('div');
 			fretno_cell.className = 'fretno';
-			fretno_cell.innerText = fret;
+			fretno_cell.innerHTML = fret;
 
 			frets_row.appendChild(fretno_cell);
 		}
