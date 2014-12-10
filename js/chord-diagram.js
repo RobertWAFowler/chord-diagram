@@ -3,12 +3,12 @@ var chordDiagram = (function() {
     var module = {};
     
     function validateArray( array, size, max_value ){
-		if ('object' != typeof array) return false;
+        if ('object' != typeof array) return false;
 
-		for (var i = 0; i < size; ++i) if ('number' != typeof array[i] || array[i] % 1 !== 0 || array[i] < -1 || array[i] > max_value) return false;
+        for (var i = 0; i < size; ++i) if ('number' != typeof array[i] || array[i] % 1 !== 0 || array[i] < -1 || array[i] > max_value) return false;
 
-		return true;
-	}
+        return true;
+    }
     
     
     // 3 Header cell possibilities : empty, 'x', 'o'
@@ -19,8 +19,8 @@ var chordDiagram = (function() {
     
     var header_cell_x = document.createElement('div');
     header_cell_x.innerHTML = '&times;';  
-	
-	function build_header(frets){
+    
+    function build_header(frets){
         var header_row = document.createElement('div');
         header_row.className = 'header';
 
@@ -39,8 +39,8 @@ var chordDiagram = (function() {
         }
         return header_row;
     }
-	
-	function build_footer(frets, fingers){
+    
+    function build_footer(frets, fingers){
         var footer_row = document.createElement('div');
         footer_row.className = 'footer';
 
@@ -58,10 +58,10 @@ var chordDiagram = (function() {
         }
         return footer_row;
     }
-	
-	
-	module.build_diagram = function (frets, fingers){
-	
+    
+    
+    module.build_diagram = function (frets, fingers){
+    
         var num_strings = frets.length;
 
         if (!validateArray(frets, num_strings, 32)) throw "Frets parameter format is invalid";
@@ -180,11 +180,10 @@ var chordDiagram = (function() {
         }
 
         return container;
-	
-	}
-	
-	module.replace_tags = function(container, classname, tagname){
-	
+    
+    }
+    module.replace_tags = function(container, classname, tagname){
+    
         // default arguments
         if(typeof(container)==='undefined')
             container = document.body;
