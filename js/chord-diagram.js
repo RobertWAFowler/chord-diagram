@@ -146,9 +146,8 @@ var chordDiagram = (function() {
                         fret_cell.appendChild(knob_cell);
                     }
 
-                    if (i == 4 && frets[5] == fret)
-                    {
                         var knob_cell = document.createElement('div');
+                    if (i === num_strings - 2 && frets[num_strings - 1] === fret) {
                         knob_cell.className = 'knob right';
 
                         fret_cell.appendChild(knob_cell);
