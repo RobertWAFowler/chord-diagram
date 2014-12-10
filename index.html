@@ -69,14 +69,32 @@ document.getElementById('chord-container').appendChild(diagram_c);
 <p>The first diagram above should look like this:</p>
 <p><img src="https://raw.github.com/oliverpool/chord-diagram/master/demo/C.png" alt="C chord diagram goes here"></p>
 
+<h2><a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
 
-<p>And we can add more diagrams:</p>
+<p>The following diagram are gatherd in the showcase.</p>
+
+<p>Barre will be displayed if one finder is used on the same fret:</p>
 <script type="text/javascript" class="teaching">
 var diagram_f = chordDiagram([1,3,3,2,1,1], [1,3,4,2,1,1]);
 document.getElementById('chord-container').appendChild(diagram_f);
+</script>
 
+<p>It is possible not to define the finger to be used:</p>
+<script type="text/javascript" class="teaching">
 var diagram_d = chordDiagram([-1,-1,0,2,3,2]);
 document.getElementById('chord-container').appendChild(diagram_d);
+</script>
+
+<p>Ukulele chords can also be displayed:</p>
+<script type="text/javascript" class="teaching">
+var diagram_bm = chordDiagram([7,9,9,7,7,7], [1,3,4,2,1,1]);
+document.getElementById('chord-container').appendChild(diagram_bm);
+</script>
+
+<p>Ukulele chords can also be displayed:</p>
+<script type="text/javascript" class="teaching">
+var diagram_u_a = chordDiagram([2,1,0,0]);
+document.getElementById('chord-container').appendChild(diagram_u_a);
 </script>
 
 <h2>

@@ -9,3 +9,7 @@ script.teaching{
   margin-bottom: 30px;
   font-size: 14px;
 }
+
+.chord-diagram{
+    margin: 0 .7em;
+}
