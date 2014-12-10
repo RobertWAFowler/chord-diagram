@@ -51,6 +51,9 @@ div.chord-diagram > div.row > div:last-child {
 	border-width: 1px 1px 0 1px;
 }
 
+div.chord-diagram > div.row:first-child {
+    margin-top:12px;
+}
 div.chord-diagram > div.row.first:first-child {
     margin-top:9px;
 }
