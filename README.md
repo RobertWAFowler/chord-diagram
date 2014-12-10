@@ -1,5 +1,7 @@
 # Chord diagram generator in pure JS
 
+[Demo](https://oliverpool.github.io/chord-diagram/)
+
 A tiny (~750 bytes when minified and gzipped) function written in pure javascript (no jQuery or other dependencies) which draws basic guitar chord diagrams in HTML/CSS. Accepts an array of fret positions (mandatory) and an array of finger numbers (optional). Automatically detects barre if more than one string is picked on the same fret with the same finger.
 
 ## Quick start
