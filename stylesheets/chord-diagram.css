@@ -143,6 +143,6 @@ div.chord-diagram > div.footer > div {
 	font-size: 10px;
 	text-align: center;
 	width: 9px;
-	height: 11px;
+	min-height: 11px;
 	float: left;
 }
