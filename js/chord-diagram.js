@@ -67,14 +67,12 @@ var chordDiagram = (function() {
         if (!validateArray(frets, num_strings, 32)) throw "Frets parameter format is invalid";
         if(typeof(fingers)!=='undefined' && !validateArray(fingers, num_strings, 4)) throw "Fingers parameter format is invalid";
 
-        var header_row_needed = false;
         var footer_row_needed = false;
         var fret_min = 100;
         var fret_max = 0;
 
         for (var i = 0; i < num_strings; ++i)
         {
-            if (frets[i] == 0 || frets[i] == -1) header_row_needed = true;
             if (frets[i] > -1 && frets[i] > fret_max) fret_max = frets[i];
             if (frets[i] > 0 && frets[i] < fret_min) fret_min = frets[i];
             if ('object' == typeof fingers && fingers[i] != -1) footer_row_needed = true;
@@ -83,10 +81,8 @@ var chordDiagram = (function() {
         var container = document.createElement('div');
         container.className = 'chord-diagram';
 
-        if (header_row_needed)
-        {
-            container.appendChild(build_header(frets));
-        }
+        container.appendChild(build_header(frets));
+        
 
         var first_fret = fret_max > 5 ? fret_min : 1;
 
