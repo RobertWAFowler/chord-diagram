@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/chord-diagram.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/custom.css" />
+    
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -14,6 +17,7 @@
   </head>
 
   <body>
+  <script src="https://raw.github.com/oliverpool/chord-diagram/master/js/chord-diagram.js" type="text/javascript"></script>
     <div id="container">
       <div class="inner">
 
@@ -37,21 +41,43 @@
 <p>A tiny (~750 bytes when minified and gzipped) function written in pure javascript (no jQuery or other dependencies) which draws basic guitar chord diagrams in HTML/CSS. Accepts an array of fret positions (mandatory) and an array of finger numbers (optional). Automatically detects barre if more than one string is picked on the same fret with the same finger.</p>
 
 <h2>
+<a name="showcase" class="anchor" href="#showcase"><span class="octicon octicon-link"></span></a>Showcase</h2>
+The following chords are displayed using the JS generator (code below):
+<div id="chord-container">
+</div>
+
+<h2>
 <a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick start</h2>
 
 <p>Download a <a href="https://github.com/oliverpool/chord-diagram/blob/master/js/chord-diagram.js">JS file</a> and a <a href="https://github.com/oliverpool/chord-diagram/blob/master/css/chord-diagram.css">CSS stylesheet</a>, drop them onto your page.
 
-<pre><code>var diagram = chordDiagram([-1,3,2,0,1,0], [-1,3,2,-1,1,-1]);
-</code></pre>
+<br/>To create a <code>div</code> containing DOM structure for <strong>C</strong> chord call:</p>
+
+
+
+<script type="text/javascript" class="teaching">
+var diagram_c = chordDiagram([-1,3,2,0,1,0], [-1,3,2,-1,1,-1]);
+</script>
+
 
 <p>Then to attach it to your document, call:</p>
 
-<pre><code>document.body.appendChild(diagram);
-</code></pre>
+<script type="text/javascript" class="teaching">
+document.getElementById('chord-container').appendChild(diagram_c);
+</script>
+
 <p>The first diagram above should look like this:</p>
 <p><img src="https://raw.github.com/oliverpool/chord-diagram/master/demo/C.png" alt="C chord diagram goes here"></p>
 
 
+<p>And we can add more of diagrams:</p>
+<script type="text/javascript" class="teaching">
+var diagram_f = chordDiagram([1,3,3,2,1,1], [1,3,4,2,1,1]);
+document.getElementById('chord-container').appendChild(diagram_f);
+
+var diagram_d = chordDiagram([-1,-1,0,2,3,2]);
+document.getElementById('chord-container').appendChild(diagram_d);
+</script>
 
 <h2>
 <a name="arguments" class="anchor" href="#arguments"><span class="octicon octicon-link"></span></a>Arguments</h2>
