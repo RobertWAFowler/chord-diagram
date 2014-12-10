@@ -9,6 +9,16 @@ var chordDiagram = (function() {
 
 		return true;
 	}
+    
+    
+    // 3 Header cell possibilities : empty, 'x', 'o'
+    var header_cell_empty = document.createElement('div');
+    
+    var header_cell_o = document.createElement('div');
+    header_cell_o.appendChild(document.createElement('div'));
+    
+    var header_cell_x = document.createElement('div');
+    header_cell_x.innerHTML = '&times;';  
 	
 	function build_header(frets){
         var header_row = document.createElement('div');
@@ -16,12 +26,16 @@ var chordDiagram = (function() {
 
         for (i in frets)
         {
-            var header_cell = document.createElement('div');
+            var header_cell;
 
-            if (frets[i] == 0) header_cell.appendChild(document.createElement('div'));
-            else if (frets[i] == -1) header_cell.innerHTML = '&times;';
-
-            header_row.appendChild(header_cell);
+            if (frets[i] == 0)
+                header_cell = header_cell_o;
+            else if (frets[i] == -1)
+                header_cell = header_cell_x;
+            else
+                header_cell = header_cell_empty;
+            
+            header_row.appendChild(header_cell.cloneNode(true));
         }
         return header_row;
     }
